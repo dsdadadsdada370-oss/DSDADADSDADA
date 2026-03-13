@@ -14,7 +14,7 @@ background:black;
 color:#00ff9c;
 }
 
-/* LOGIN & REGISTER BOX */
+/* LOGIN & REGISTER */
 
 .container{
 width:320px;
@@ -26,7 +26,7 @@ text-align:center;
 box-shadow:0 0 20px #00ff9c;
 }
 
-input{
+input,select{
 width:100%;
 padding:10px;
 margin:8px 0;
@@ -233,7 +233,7 @@ loginMsg.innerText="Wrong Username or Password"
 
 }
 
-/* AUTO BOOT COMMAND */
+/* AUTO TERMINAL BOOT */
 
 function bootSystem(){
 
@@ -314,17 +314,50 @@ content.innerHTML="<h2>Profile</h2><p>User: "+u+"</p>"
 
 }
 
-/* GUILD GLORY */
+/* GUILD GLORY PANEL */
 
 function guild(){
 
-content.innerHTML="\
-<h2>Guild Glory</h2>\
-<p>Guild Name: DS DADA</p>\
-<p>Guild Rank: Elite</p>\
-<p>Guild Points: 12500</p>\
-<p>Status: Active</p>\
-"
+content.innerHTML=`
+
+<h2>Guild Glory</h2>
+
+<input id="uid" placeholder="Enter UID">
+
+<select id="region">
+
+<option>India</option>
+<option>Bangladesh</option>
+<option>Singapore</option>
+<option>Brazil</option>
+<option>Middle East</option>
+<option>Thailand</option>
+<option>Indonesia</option>
+
+</select>
+
+<button onclick="sendGlory()">Send Glory</button>
+
+<p id="gloryResult"></p>
+
+`
+
+}
+
+/* SEND GLORY */
+
+function sendGlory(){
+
+let uid=document.getElementById("uid").value
+let region=document.getElementById("region").value
+
+if(uid==""){
+document.getElementById("gloryResult").innerText="Enter UID first"
+return
+}
+
+document.getElementById("gloryResult").innerText=
+"Glory request sent to UID "+uid+" ("+region+")"
 
 }
 
