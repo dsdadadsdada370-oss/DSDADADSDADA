@@ -8,63 +8,102 @@
 <style>
 
 body{
-font-family:Arial;
-background:linear-gradient(120deg,#1e3c72,#2a5298);
 margin:0;
-padding:0;
+font-family:monospace;
+background:black;
+color:#00ff9c;
 }
+
+/* LOGIN BOX */
 
 .container{
 width:320px;
-margin:100px auto;
-background:white;
+margin:120px auto;
+background:#111;
 padding:25px;
-border-radius:10px;
-box-shadow:0 0 15px rgba(0,0,0,0.3);
+border:1px solid #00ff9c;
 text-align:center;
-}
-
-.title{
-font-size:22px;
-font-weight:bold;
-margin-bottom:15px;
-color:#2a5298;
+box-shadow:0 0 20px #00ff9c;
 }
 
 input{
 width:100%;
 padding:10px;
 margin:8px 0;
-border:1px solid #ccc;
-border-radius:5px;
+background:black;
+border:1px solid #00ff9c;
+color:#00ff9c;
 }
 
 button{
 width:100%;
 padding:10px;
-margin-top:10px;
-background:#2a5298;
-color:white;
+background:#00ff9c;
 border:none;
-border-radius:5px;
-font-size:16px;
-cursor:pointer;
-}
-
-button:hover{
-background:#1e3c72;
-}
-
-.link{
-color:#2a5298;
+color:black;
 cursor:pointer;
 font-weight:bold;
 }
 
-.msg{
-margin-top:10px;
-font-size:14px;
-color:green;
+.link{
+color:#00ff9c;
+cursor:pointer;
+}
+
+/* DASHBOARD */
+
+#dashboard{
+display:none;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+height:100%;
+width:0;
+position:fixed;
+top:0;
+left:0;
+background:#111;
+overflow-x:hidden;
+transition:0.3s;
+padding-top:60px;
+border-right:1px solid #00ff9c;
+}
+
+.sidebar a{
+display:block;
+padding:12px;
+text-decoration:none;
+color:#00ff9c;
+}
+
+.sidebar a:hover{
+background:#00ff9c;
+color:black;
+}
+
+.menuBtn{
+font-size:22px;
+background:black;
+color:#00ff9c;
+border:1px solid #00ff9c;
+padding:10px;
+cursor:pointer;
+}
+
+.content{
+padding:20px;
+}
+
+/* COMMAND BOX */
+
+.commandBox input{
+width:70%;
+}
+
+.commandBox button{
+width:25%;
 }
 
 </style>
@@ -72,54 +111,61 @@ color:green;
 
 <body>
 
-<div class="container">
-
-<div class="title">DS DADA FREE FIRE</div>
-
 <!-- LOGIN PAGE -->
-<div id="loginPage">
 
-<h3>Login</h3>
+<div class="container" id="loginPage">
 
-<input type="text" id="loginUser" placeholder="Username">
+<h2>DS DADA FREE FIRE</h2>
 
+<input id="loginUser" placeholder="Username">
 <input type="password" id="loginPass" placeholder="Password">
 
-<button onclick="login()">Login</button>
+<button onclick="login()">LOGIN</button>
 
-<p>No account? <span class="link" onclick="showRegister()">Register</span></p>
+<p>New user? <span class="link" onclick="showRegister()">Register</span></p>
 
-<div class="msg" id="loginMsg"></div>
+<p id="loginMsg"></p>
 
 </div>
 
 
 <!-- REGISTER PAGE -->
-<div id="registerPage" style="display:none">
 
-<h3>Register</h3>
+<div class="container" id="registerPage" style="display:none">
 
-<input type="text" id="regUser" placeholder="Username">
+<h2>REGISTER</h2>
 
+<input id="regUser" placeholder="Username">
 <input type="password" id="regPass" placeholder="Password">
 
-<button onclick="register()">Register</button>
+<button onclick="register()">REGISTER</button>
 
 <p>Already account? <span class="link" onclick="showLogin()">Login</span></p>
 
-<div class="msg" id="regMsg"></div>
+<p id="regMsg"></p>
 
 </div>
 
 
 <!-- DASHBOARD -->
-<div id="dashboard" style="display:none">
 
-<h2 id="welcome"></h2>
+<div id="dashboard">
 
-<p>Welcome to DS DADA FREE FIRE</p>
+<div class="sidebar" id="sidebar">
 
-<button onclick="logout()">Logout</button>
+<a href="#" onclick="home()">Home</a>
+<a href="#" onclick="profile()">Profile</a>
+<a href="#" onclick="commands()">Command Panel</a>
+<a href="#" onclick="logout()">Logout</a>
+
+</div>
+
+<button class="menuBtn" onclick="menu()">☰</button>
+
+<div class="content" id="content">
+
+<h2>WELCOME TO DS DADA FREE FIRE</h2>
+<p>Select option from menu</p>
 
 </div>
 
@@ -128,60 +174,135 @@ color:green;
 
 <script>
 
+/* PAGE SWITCH */
+
 function showRegister(){
-document.getElementById("loginPage").style.display="none";
-document.getElementById("registerPage").style.display="block";
+loginPage.style.display="none"
+registerPage.style.display="block"
 }
 
 function showLogin(){
-document.getElementById("registerPage").style.display="none";
-document.getElementById("loginPage").style.display="block";
+registerPage.style.display="none"
+loginPage.style.display="block"
 }
+
+/* REGISTER */
 
 function register(){
 
-let user=document.getElementById("regUser").value;
-let pass=document.getElementById("regPass").value;
+let u=regUser.value
+let p=regPass.value
 
-if(user=="" || pass==""){
-document.getElementById("regMsg").innerText="Please fill all fields";
-return;
+if(u==""||p==""){
+regMsg.innerText="Fill all fields"
+return
 }
 
-localStorage.setItem("username",user);
-localStorage.setItem("password",pass);
+localStorage.setItem("user",u)
+localStorage.setItem("pass",p)
 
-document.getElementById("regMsg").innerText="Registration Successful";
+regMsg.innerText="Registration Successful"
 
 }
+
+/* LOGIN */
 
 function login(){
 
-let user=document.getElementById("loginUser").value;
-let pass=document.getElementById("loginPass").value;
+let u=loginUser.value
+let p=loginPass.value
 
-let storedUser=localStorage.getItem("username");
-let storedPass=localStorage.getItem("password");
+let su=localStorage.getItem("user")
+let sp=localStorage.getItem("pass")
 
-if(user===storedUser && pass===storedPass){
+if(u==su && p==sp){
 
-document.getElementById("loginPage").style.display="none";
-document.getElementById("dashboard").style.display="block";
-
-document.getElementById("welcome").innerText="Welcome "+user;
+loginPage.style.display="none"
+dashboard.style.display="block"
 
 }else{
 
-document.getElementById("loginMsg").innerText="Wrong Username or Password";
+loginMsg.innerText="Wrong login"
 
 }
 
 }
+
+/* MENU */
+
+function menu(){
+
+let m=sidebar
+
+if(m.style.width=="200px"){
+m.style.width="0"
+}else{
+m.style.width="200px"
+}
+
+}
+
+/* PAGES */
+
+function home(){
+
+content.innerHTML="<h2>Home</h2><p>DS DADA FREE FIRE Control Panel</p>"
+
+}
+
+function profile(){
+
+let u=localStorage.getItem("user")
+
+content.innerHTML="<h2>Profile</h2><p>User: "+u+"</p>"
+
+}
+
+function commands(){
+
+content.innerHTML=`
+
+<h2>Command Panel</h2>
+
+<div class="commandBox">
+
+<input id="cmd" placeholder="Enter command">
+<button onclick="run()">Run</button>
+
+<p id="result"></p>
+
+</div>
+
+`
+
+}
+
+function run(){
+
+let c=document.getElementById("cmd").value
+let r=document.getElementById("result")
+
+if(c=="hello"){
+r.innerText="Hello Boss 😎"
+}
+else if(c=="ff"){
+r.innerText="BOOYAH 🔥"
+}
+else if(c=="panel"){
+r.innerText="Admin Panel Active"
+}
+else{
+r.innerText="Unknown Command"
+}
+
+}
+
+/* LOGOUT */
 
 function logout(){
 
-document.getElementById("dashboard").style.display="none";
-document.getElementById("loginPage").style.display="block";
+dashboard.style.display="none"
+loginPage.style.display="block"
 
 }
 
@@ -190,4 +311,3 @@ document.getElementById("loginPage").style.display="block";
 </body>
 </html>
 ```
-
