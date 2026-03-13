@@ -14,7 +14,7 @@ background:black;
 color:#00ff9c;
 }
 
-/* LOGIN */
+/* LOGIN & REGISTER BOX */
 
 .container{
 width:320px;
@@ -100,19 +100,11 @@ padding:20px;
 /* TERMINAL */
 
 .terminal{
-background:black;
 border:1px solid #00ff9c;
-padding:15px;
+padding:10px;
 height:200px;
 overflow:auto;
-}
-
-.commandBox input{
-width:70%;
-}
-
-.commandBox button{
-width:25%;
+margin-top:10px;
 }
 
 </style>
@@ -164,6 +156,7 @@ width:25%;
 
 <a href="#" onclick="home()">Home</a>
 <a href="#" onclick="profile()">Profile</a>
+<a href="#" onclick="guild()">Guild Glory</a>
 <a href="#" onclick="commands()">Command Panel</a>
 <a href="#" onclick="logout()">Logout</a>
 
@@ -234,13 +227,13 @@ bootSystem()
 
 }else{
 
-loginMsg.innerText="Wrong login"
+loginMsg.innerText="Wrong Username or Password"
 
 }
 
 }
 
-/* AUTO COMMAND BOOT */
+/* AUTO BOOT COMMAND */
 
 function bootSystem(){
 
@@ -293,7 +286,7 @@ m.style.width="200px"
 
 }
 
-/* CLICK OUTSIDE MENU = HIDE */
+/* OUTSIDE CLICK MENU HIDE */
 
 document.addEventListener("click",function(e){
 
@@ -303,13 +296,15 @@ sidebar.style.width="0"
 
 })
 
-/* PAGES */
+/* HOME */
 
 function home(){
 
 content.innerHTML="<h2>Dashboard</h2><p>Welcome to DS DADA FREE FIRE Panel</p>"
 
 }
+
+/* PROFILE */
 
 function profile(){
 
@@ -319,20 +314,33 @@ content.innerHTML="<h2>Profile</h2><p>User: "+u+"</p>"
 
 }
 
+/* GUILD GLORY */
+
+function guild(){
+
+content.innerHTML="\
+<h2>Guild Glory</h2>\
+<p>Guild Name: DS DADA</p>\
+<p>Guild Rank: Elite</p>\
+<p>Guild Points: 12500</p>\
+<p>Status: Active</p>\
+"
+
+}
+
+/* COMMAND PANEL */
+
 function commands(){
 
 content.innerHTML=`
 
 <h2>Command Panel</h2>
 
-<div class="commandBox">
-
 <input id="cmd" placeholder="Enter command">
+
 <button onclick="run()">Run</button>
 
 <p id="result"></p>
-
-</div>
 
 `
 
@@ -349,8 +357,8 @@ r.innerText="Hello Boss 😎"
 else if(c=="ff"){
 r.innerText="BOOYAH 🔥"
 }
-else if(c=="panel"){
-r.innerText="Admin Panel Active"
+else if(c=="guild"){
+r.innerText="Guild System Active"
 }
 else{
 r.innerText="Unknown Command"
