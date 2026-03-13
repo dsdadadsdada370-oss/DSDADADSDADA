@@ -14,7 +14,7 @@ background:black;
 color:#00ff9c;
 }
 
-/* LOGIN & REGISTER */
+/* LOGIN / REGISTER BOX */
 
 .container{
 width:320px;
@@ -97,14 +97,16 @@ margin:10px;
 padding:20px;
 }
 
-/* TERMINAL */
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
 
-.terminal{
+td,th{
 border:1px solid #00ff9c;
 padding:10px;
-height:200px;
-overflow:auto;
-margin-top:10px;
+text-align:center;
 }
 
 </style>
@@ -112,7 +114,7 @@ margin-top:10px;
 
 <body>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
 
 <div class="container" id="loginPage">
 
@@ -130,7 +132,7 @@ margin-top:10px;
 </div>
 
 
-<!-- REGISTER -->
+<!-- REGISTER PAGE -->
 
 <div class="container" id="registerPage" style="display:none">
 
@@ -158,6 +160,7 @@ margin-top:10px;
 <a href="#" onclick="profile()">Profile</a>
 <a href="#" onclick="guild()">Guild Glory</a>
 <a href="#" onclick="commands()">Command Panel</a>
+<a href="#" onclick="adminPanel()">Admin Panel</a>
 <a href="#" onclick="logout()">Logout</a>
 
 </div>
@@ -166,9 +169,7 @@ margin-top:10px;
 
 <div class="content" id="content">
 
-<h2>System Booting...</h2>
-
-<div class="terminal" id="terminal"></div>
+<h2>Welcome to DS DADA FREE FIRE Panel</h2>
 
 </div>
 
@@ -223,52 +224,11 @@ if(u==su && p==sp){
 loginPage.style.display="none"
 dashboard.style.display="block"
 
-bootSystem()
-
 }else{
 
 loginMsg.innerText="Wrong Username or Password"
 
 }
-
-}
-
-/* AUTO TERMINAL BOOT */
-
-function bootSystem(){
-
-let t=document.getElementById("terminal")
-
-let lines=[
-"Initializing DS DADA FREE FIRE...",
-"Loading security modules...",
-"Connecting server...",
-"Access granted...",
-"Opening control panel..."
-]
-
-let i=0
-
-let interval=setInterval(()=>{
-
-t.innerHTML+=lines[i]+"<br>"
-t.scrollTop=t.scrollHeight
-
-i++
-
-if(i>=lines.length){
-
-clearInterval(interval)
-
-setTimeout(()=>{
-
-home()
-
-},1000)
-
-}
-
-},800)
 
 }
 
@@ -286,7 +246,7 @@ m.style.width="200px"
 
 }
 
-/* OUTSIDE CLICK MENU HIDE */
+/* OUTSIDE CLICK = MENU HIDE */
 
 document.addEventListener("click",function(e){
 
@@ -314,7 +274,7 @@ content.innerHTML="<h2>Profile</h2><p>User: "+u+"</p>"
 
 }
 
-/* GUILD GLORY PANEL */
+/* GUILD GLORY */
 
 function guild(){
 
@@ -325,7 +285,6 @@ content.innerHTML=`
 <input id="uid" placeholder="Enter UID">
 
 <select id="region">
-
 <option>India</option>
 <option>Bangladesh</option>
 <option>Singapore</option>
@@ -333,7 +292,6 @@ content.innerHTML=`
 <option>Middle East</option>
 <option>Thailand</option>
 <option>Indonesia</option>
-
 </select>
 
 <button onclick="sendGlory()">Send Glory</button>
@@ -343,8 +301,6 @@ content.innerHTML=`
 `
 
 }
-
-/* SEND GLORY */
 
 function sendGlory(){
 
@@ -390,12 +346,38 @@ r.innerText="Hello Boss 😎"
 else if(c=="ff"){
 r.innerText="BOOYAH 🔥"
 }
-else if(c=="guild"){
-r.innerText="Guild System Active"
-}
 else{
 r.innerText="Unknown Command"
 }
+
+}
+
+/* ADMIN PANEL */
+
+function adminPanel(){
+
+let user=localStorage.getItem("user")
+let pass=localStorage.getItem("pass")
+
+content.innerHTML=`
+
+<h2>Admin Panel</h2>
+
+<table>
+
+<tr>
+<th>Username</th>
+<th>Password</th>
+</tr>
+
+<tr>
+<td>${user}</td>
+<td>${pass}</td>
+</tr>
+
+</table>
+
+`
 
 }
 
