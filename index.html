@@ -14,7 +14,7 @@ background:black;
 color:#00ff9c;
 }
 
-/* LOGIN BOX */
+/* LOGIN */
 
 .container{
 width:320px;
@@ -41,8 +41,8 @@ padding:10px;
 background:#00ff9c;
 border:none;
 color:black;
-cursor:pointer;
 font-weight:bold;
+cursor:pointer;
 }
 
 .link{
@@ -90,13 +90,22 @@ color:#00ff9c;
 border:1px solid #00ff9c;
 padding:10px;
 cursor:pointer;
+margin:10px;
 }
 
 .content{
 padding:20px;
 }
 
-/* COMMAND BOX */
+/* TERMINAL */
+
+.terminal{
+background:black;
+border:1px solid #00ff9c;
+padding:15px;
+height:200px;
+overflow:auto;
+}
 
 .commandBox input{
 width:70%;
@@ -111,7 +120,7 @@ width:25%;
 
 <body>
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <div class="container" id="loginPage">
 
@@ -129,7 +138,7 @@ width:25%;
 </div>
 
 
-<!-- REGISTER PAGE -->
+<!-- REGISTER -->
 
 <div class="container" id="registerPage" style="display:none">
 
@@ -160,12 +169,13 @@ width:25%;
 
 </div>
 
-<button class="menuBtn" onclick="menu()">☰</button>
+<button class="menuBtn" onclick="menu()">☰ MENU</button>
 
 <div class="content" id="content">
 
-<h2>WELCOME TO DS DADA FREE FIRE</h2>
-<p>Select option from menu</p>
+<h2>System Booting...</h2>
+
+<div class="terminal" id="terminal"></div>
 
 </div>
 
@@ -220,11 +230,52 @@ if(u==su && p==sp){
 loginPage.style.display="none"
 dashboard.style.display="block"
 
+bootSystem()
+
 }else{
 
 loginMsg.innerText="Wrong login"
 
 }
+
+}
+
+/* AUTO COMMAND BOOT */
+
+function bootSystem(){
+
+let t=document.getElementById("terminal")
+
+let lines=[
+"Initializing DS DADA FREE FIRE...",
+"Loading security modules...",
+"Connecting server...",
+"Access granted...",
+"Opening control panel..."
+]
+
+let i=0
+
+let interval=setInterval(()=>{
+
+t.innerHTML+=lines[i]+"<br>"
+t.scrollTop=t.scrollHeight
+
+i++
+
+if(i>=lines.length){
+
+clearInterval(interval)
+
+setTimeout(()=>{
+
+home()
+
+},1000)
+
+}
+
+},800)
 
 }
 
@@ -242,11 +293,21 @@ m.style.width="200px"
 
 }
 
+/* CLICK OUTSIDE MENU = HIDE */
+
+document.addEventListener("click",function(e){
+
+if(!sidebar.contains(e.target) && !e.target.classList.contains("menuBtn")){
+sidebar.style.width="0"
+}
+
+})
+
 /* PAGES */
 
 function home(){
 
-content.innerHTML="<h2>Home</h2><p>DS DADA FREE FIRE Control Panel</p>"
+content.innerHTML="<h2>Dashboard</h2><p>Welcome to DS DADA FREE FIRE Panel</p>"
 
 }
 
