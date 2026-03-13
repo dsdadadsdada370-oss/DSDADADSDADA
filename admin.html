@@ -1,0 +1,151 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DS DADA ADMIN PANEL</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff9c;
+font-family:monospace;
+margin:0;
+}
+
+/* LOGIN BOX */
+
+.container{
+width:320px;
+margin:120px auto;
+background:#111;
+padding:25px;
+border:1px solid #00ff9c;
+text-align:center;
+box-shadow:0 0 20px #00ff9c;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+background:black;
+border:1px solid #00ff9c;
+color:#00ff9c;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#00ff9c;
+border:none;
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* ADMIN PANEL */
+
+#adminPanel{
+display:none;
+padding:20px;
+}
+
+.menuBtn{
+font-size:22px;
+background:black;
+color:#00ff9c;
+border:1px solid #00ff9c;
+padding:10px;
+cursor:pointer;
+width:100%;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+td,th{
+border:1px solid #00ff9c;
+padding:10px;
+text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ADMIN LOGIN -->
+
+<div class="container" id="loginBox">
+
+<h2>ADMIN LOGIN</h2>
+
+<input id="adminUser" placeholder="Username">
+
+<input type="password" id="adminPass" placeholder="Password">
+
+<button onclick="login()">LOGIN</button>
+
+<p id="msg"></p>
+
+</div>
+
+
+<!-- ADMIN PANEL -->
+
+<div id="adminPanel">
+
+<button class="menuBtn">☰ MENU</button>
+
+<h2>Admin Panel</h2>
+
+<table>
+
+<tr>
+<th>Username</th>
+<th>Password</th>
+</tr>
+
+<tr>
+<td>12</td>
+<td>12</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<script>
+
+/* ADMIN LOGIN */
+
+function login(){
+
+let u=document.getElementById("adminUser").value
+let p=document.getElementById("adminPass").value
+
+if(u==="DSDADA" && p==="DSDADA12"){
+
+document.getElementById("loginBox").style.display="none"
+document.getElementById("adminPanel").style.display="block"
+
+}else{
+
+document.getElementById("msg").innerText="Wrong Admin Login"
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
+```
+
