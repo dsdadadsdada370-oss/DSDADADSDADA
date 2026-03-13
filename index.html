@@ -1,80 +1,113 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
-<title>Login Register System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DS DADA FREE FIRE</title>
 
 <style>
 
 body{
-font-family: Arial;
-background:#f2f2f2;
+font-family:Arial;
+background:linear-gradient(120deg,#1e3c72,#2a5298);
+margin:0;
+padding:0;
 }
 
 .container{
 width:320px;
 margin:100px auto;
 background:white;
-padding:20px;
-border-radius:8px;
-box-shadow:0 0 10px gray;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 15px rgba(0,0,0,0.3);
 text-align:center;
+}
+
+.title{
+font-size:22px;
+font-weight:bold;
+margin-bottom:15px;
+color:#2a5298;
 }
 
 input{
 width:100%;
 padding:10px;
 margin:8px 0;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 button{
 width:100%;
 padding:10px;
 margin-top:10px;
-background:#007bff;
+background:#2a5298;
 color:white;
 border:none;
+border-radius:5px;
+font-size:16px;
 cursor:pointer;
+}
+
+button:hover{
+background:#1e3c72;
 }
 
 .link{
-color:blue;
+color:#2a5298;
 cursor:pointer;
+font-weight:bold;
+}
+
+.msg{
+margin-top:10px;
+font-size:14px;
+color:green;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<!-- LOGIN -->
+<div class="title">DS DADA FREE FIRE</div>
+
+<!-- LOGIN PAGE -->
 <div id="loginPage">
 
-<h2>Login</h2>
+<h3>Login</h3>
 
 <input type="text" id="loginUser" placeholder="Username">
+
 <input type="password" id="loginPass" placeholder="Password">
 
 <button onclick="login()">Login</button>
 
 <p>No account? <span class="link" onclick="showRegister()">Register</span></p>
 
+<div class="msg" id="loginMsg"></div>
+
 </div>
 
 
-<!-- REGISTER -->
+<!-- REGISTER PAGE -->
 <div id="registerPage" style="display:none">
 
-<h2>Register</h2>
+<h3>Register</h3>
 
 <input type="text" id="regUser" placeholder="Username">
+
 <input type="password" id="regPass" placeholder="Password">
 
 <button onclick="register()">Register</button>
 
 <p>Already account? <span class="link" onclick="showLogin()">Login</span></p>
+
+<div class="msg" id="regMsg"></div>
 
 </div>
 
@@ -84,7 +117,7 @@ cursor:pointer;
 
 <h2 id="welcome"></h2>
 
-<p>Welcome to Dashboard</p>
+<p>Welcome to DS DADA FREE FIRE</p>
 
 <button onclick="logout()">Logout</button>
 
@@ -110,12 +143,15 @@ function register(){
 let user=document.getElementById("regUser").value;
 let pass=document.getElementById("regPass").value;
 
+if(user=="" || pass==""){
+document.getElementById("regMsg").innerText="Please fill all fields";
+return;
+}
+
 localStorage.setItem("username",user);
 localStorage.setItem("password",pass);
 
-alert("Registration Successful");
-
-showLogin();
+document.getElementById("regMsg").innerText="Registration Successful";
 
 }
 
@@ -136,7 +172,7 @@ document.getElementById("welcome").innerText="Welcome "+user;
 
 }else{
 
-alert("Wrong Username or Password");
+document.getElementById("loginMsg").innerText="Wrong Username or Password";
 
 }
 
@@ -153,3 +189,5 @@ document.getElementById("loginPage").style.display="block";
 
 </body>
 </html>
+```
+
